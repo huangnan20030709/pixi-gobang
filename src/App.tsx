@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { Application } from 'pixi.js';
+import { useEffect, useRef } from 'react';
+import { paddimgTop } from './setting';
+import { Chessboard } from './pojo/Chessboard';
 function App() {
-  const [count, setCount] = useState(0)
+  const divRef = useRef<HTMLDivElement>(null);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  useEffect(() => {
+    init();
+  }, []);
+
+  const init = async () => {
+    const app = new Application();
+
+    await app.init({ background: '#DDB565', resizeTo: window });
+
+    divRef.current?.appendChild(app.canvas);
+
+    // 创建棋盘
+    const chessboard = new Chessboard();
+    chessboard.position.set((app.canvas.width - 15 * 50) / 2 - 35, paddimgTop);
+
+    app.stage.addChild(chessboard);
+  };
+
+  return <div ref={divRef} style={{ width: '100vw', height: '100vh' }}></div>;
 }
 
-export default App
+export default App;
