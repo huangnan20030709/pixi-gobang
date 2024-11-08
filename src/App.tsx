@@ -6,7 +6,7 @@ import { paddimgTop } from './setting';
 function App() {
   const divRef = useRef<HTMLDivElement>(null);
 
-  const a = 1;
+  // const a = 1;
 
   const init = async () => {
     const app = new Application();

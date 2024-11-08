@@ -1,4 +1,5 @@
 import { Color, Container, FillGradient, Graphics, Text, TextStyle } from 'pixi.js';
+
 import TouchableText from '../base/ui/TouchableText';
 
 interface ChessPoint {
@@ -11,7 +12,7 @@ export class Chessboard extends Container {
   meth: ChessPoint[][] = new Array(15).fill(0).map(() => new Array(15).fill(0).map(() => ({ state: 0 })));
 
   //设置右边文字
-  setCurText: (str: string) => void = () => {};
+  setCurText: (str: string) => void;
 
   constructor() {
     super();
@@ -62,7 +63,7 @@ export class Chessboard extends Container {
   }
 
   drawLine(x1: number, y1: number, x2: number, y2: number) {
-    let line = new Graphics();
+    const line = new Graphics();
     line.moveTo(x1, y1);
     line.lineTo(x2, y2);
     line.fillStyle = 0x000000;
@@ -89,12 +90,12 @@ export class Chessboard extends Container {
         color: '#000000',
         blur: 4,
         angle: Math.PI / 6,
-        distance: 6
+        distance: 6,
       },
       wordWrap: true,
       wordWrapWidth: 180,
       breakWords: true,
-      align: 'center'
+      align: 'center',
     });
     const richText = new Text('当前回合:黑方', style);
     richText.x = this.width;
@@ -243,17 +244,17 @@ export class Chessboard extends Container {
         angle: 2.1,
         blur: 2,
         color: '0x111111',
-        distance: 10
+        distance: 10,
       },
       fill: '#ffffff',
       stroke: { color: '#00a620', width: 6, join: 'round' },
       fontSize: 60,
-      fontWeight: 'lighter'
+      fontWeight: 'lighter',
     });
 
     const skewText = new Text({
       text: msg + '胜利',
-      style: skewStyle
+      style: skewStyle,
     });
     skewText.eventMode = 'dynamic';
     skewText.anchor.set(0.5, 0.5);
@@ -272,7 +273,7 @@ export class Chessboard extends Container {
       fill: { fill },
       stroke: { color: '#4a1850', width: 5, join: 'round' },
       wordWrap: true,
-      wordWrapWidth: 440
+      wordWrapWidth: 440,
     });
 
     const richText = new TouchableText('再来一次', style, () => {
