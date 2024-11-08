@@ -1,13 +1,12 @@
 import { Application } from 'pixi.js';
-import { useEffect, useRef } from 'react';
-import { paddimgTop } from './setting';
+import React, { useEffect, useRef } from 'react';
+
 import { Chessboard } from './pojo/Chessboard';
+import { paddimgTop } from './setting';
 function App() {
   const divRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    init();
-  }, []);
+  const a = 1;
 
   const init = async () => {
     const app = new Application();
@@ -22,6 +21,10 @@ function App() {
 
     app.stage.addChild(chessboard);
   };
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return <div ref={divRef} style={{ width: '100vw', height: '100vh' }}></div>;
 }
